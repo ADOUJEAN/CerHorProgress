@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CerHorProgress">
+        <attr name="progressType" format="string" />
+        <attr name="progressMin" format="integer" />
+        <attr name="progressMax" format="integer" />
+        <attr name="progress" format="integer" />
+        <attr name="progressCercleText" format="string" />
+        <attr name="progressCercleTextUnity" format="string" />
+        <attr name="progressBackgroundColor" format="color" />
+        <attr name="progressForgroundColor" format="color" />
+        <attr name="progressThickness" format="dimension" />
+        <attr name="useAdjustColor" format="boolean" />
+    </declare-styleable>
+
+</resources>
