@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
             val minValue=1
             val progresVal=((Math.random() * (maxValue -minValue))-minValue).toFloat()
             binding.horizontalProgress.setProgressWithAnimationAndMax(progresVal,maxValue.toFloat())
+            binding.verticalProgress.setProgressWithAnimationAndMax(progresVal,maxValue.toFloat())
             binding.cercleProgress.setProgressWithAnimationAndMax(progresVal,maxValue.toFloat())
         }
     }

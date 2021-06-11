@@ -31,31 +31,79 @@
         app:useAdjustColor="false"
         />
 
-    <TextView
-        android:gravity="center"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="10dp"
-        android:textSize="18sp"
-        android:textColor="#FF3700B3"
+    <LinearLayout
+        android:layout_gravity="center"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cercle Progress with texts"/>
+        android:layout_height="wrap_content">
 
-    <ci.jjk.cerhorprogress.CerHorProgress
-        android:id="@+id/cercleProgress"
-        app:progressType="cercle"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        app:progress="35"
-        app:progressMax="100"
-        app:progressMin="0"
-        app:progressCercleText="1000"
-        app:progressCercleTextUnity="MB"
-        app:progressForgroundColor="#FF3700B3"
-        app:progressBackgroundColor="@android:color/darker_gray"
-        app:progressThickness="5dp"
-        app:useAdjustColor="false"
-        />
+        <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:gravity="center"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="18sp"
+                android:textColor="#FF3700B3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cercle Progress \nwith texts"/>
+
+            <ci.jjk.cerhorprogress.CerHorProgress
+                android:id="@+id/cercleProgress"
+                app:progressType="cercle"
+                android:layout_width="300dp"
+                android:layout_height="200dp"
+                app:progress="35"
+                app:progressMax="100"
+                app:progressMin="0"
+                app:progressCercleText="35"
+                app:progressCercleTextUnity="Mb/s"
+                app:progressForgroundColor="#FF3700B3"
+                app:progressBackgroundColor="@android:color/darker_gray"
+                app:progressThickness="5dp"
+                app:useAdjustColor="false"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:gravity="center"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="18sp"
+                android:textColor="#FF3700B3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Horizontal Progress\n"/>
+
+            <ci.jjk.cerhorprogress.CerHorProgress
+                android:id="@+id/verticalProgress"
+                app:progressType="vertical"
+                android:layout_width="50dp"
+                android:layout_height="200dp"
+                app:progress="35"
+                app:progressMax="100"
+                app:progressMin="0"
+                app:progressForgroundColor="@android:color/darker_gray"
+                app:progressBackgroundColor="#FF3700B3"
+                app:progressThickness="5dp"
+                app:useAdjustColor="false"
+                />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
     <Button
         android:layout_margin="20dp"

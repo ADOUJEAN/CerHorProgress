@@ -1,5 +1,5 @@
 # CerHorProgress
-A subclass of {@link android.view.View} class for creating a custom circular and horizontal progressBar with the possibility of two texts inside on circular progress. Such as the value of progression ...
+A subclass of {@link android.view.View} class for creating a custom circular, horizontal and vertical progressBar with the possibility of two texts inside on circular progress. Such as the value of progression ...
 
 # How to use CerHorProgress ?
 
@@ -18,7 +18,7 @@ allprojects {
 
 ```gradle
 dependencies {
-   implementation 'com.github.ADOUJEAN:CerHorProgress:0.1.0'
+   implementation 'com.github.ADOUJEAN:CerHorProgress:0.1.1'
 }
 ```
 
@@ -34,8 +34,8 @@ For use ***cercle progress*** set this :
         app:progress="35"
         app:progressMax="100"
         app:progressMin="0"
-        app:progressCercleText="1000"
-        app:progressCercleTextUnity="MB"
+        app:progressCercleText="35"
+        app:progressCercleTextUnity="Mb/s"
         app:progressForgroundColor="#FF3700B3"
         app:progressBackgroundColor="@android:color/darker_gray"
         app:progressThickness="5dp"
@@ -44,7 +44,6 @@ For use ***cercle progress*** set this :
 ```
 
 For use ***horizontal progress*** set this :
-
 
 ```xml
  <ci.jjk.cerhorprogress.CerHorProgress
@@ -62,6 +61,24 @@ For use ***horizontal progress*** set this :
         />
 ```
 
+For use ***vertical progress*** set this :
+
+```xml
+ <ci.jjk.cerhorprogress.CerHorProgress
+        android:id="@+id/verticalProgress"
+        app:progressType="vertical"
+        android:layout_width="50dp"
+        android:layout_height="200dp"
+        app:progress="35"
+        app:progressMax="100"
+        app:progressMin="0"
+        app:progressForgroundColor="@android:color/darker_gray"
+        app:progressBackgroundColor="#FF3700B3"
+        app:progressThickness="5dp"
+        app:useAdjustColor="false"
+        />
+```
+
 
 ## 4. Now you can dance with the CerHorProgress as you want :dancer: !
 
@@ -72,12 +89,16 @@ For use ***horizontal progress*** set this :
 val maxValue=100
 val minValue=1
 val progresVal=((Math.random() * (maxValue -minValue))-minValue).toFloat()
-horizontalProgress.setProgressWithAnimationAndMax(progresVal,maxValue.toFloat())
+// Anim cercle progress
 cercleProgress.setProgressWithAnimationAndMax(progresVal,maxValue.toFloat())
+// Anim horizontal progress
+horizontalProgress.setProgressWithAnimationAndMax(progresVal,maxValue.toFloat())
+// Anim vertical progress
+verticalProgress.setProgressWithAnimationAndMax(progresVal,maxValue.toFloat())
 ```
 
 That's it.
 
-![ScreenShot](/photo_2021-06-10_14-47-32.jpg)
+![ScreenShot](/Screen_Recording_20210611-103241_CerHorProgress_1.gif)
 
 Thank you!

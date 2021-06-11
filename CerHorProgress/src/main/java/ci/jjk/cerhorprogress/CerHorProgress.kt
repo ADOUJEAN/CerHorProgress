@@ -25,7 +25,8 @@ class CerHorProgress (context: Context, attrs: AttributeSet) : View(context, att
      * CIRCULAR : Default is circular. Set @param progressType="cercle" for use circular progress
      * HORIZONTAL : Set @param progressType="HORIZONTAL" for use Horizontal progress
      */
-    private var progressType = "cercle"
+    //private var progressType = "cercle"
+    private var progressType = "vertical"
     private var useAdjust = true
 
     private var strokeWidth = 4f
@@ -234,7 +235,31 @@ if (progressType=="cercle") {
     /** Draw cercle text **/
     canvas.drawText(progressCercleText, w, h - ((textPaint.descent() - textPaint.ascent()) / 2), textPaint)
     canvas.drawText(progressCercleTextUnity, w, h + textPaintUnity.descent() - textPaintUnity.ascent(), textPaintUnity)
-}else{
+}
+else if (progressType=="vertical"){
+    /** Draw line and set paint for vertical progress **/
+    canvas.drawLine(
+        wCanvas/2, // startX
+        hCanvas, // startY
+        wCanvas/2, // stopX
+        0f, // stopY
+        backgroundPaint!! // Paint
+    )
+
+    /** Define stop indicator **/
+    val stopIndicator = hCanvas * progress / progressMax
+    canvas.drawLine(
+        wCanvas/2, // stopX
+        0f,
+        wCanvas/2, // startX
+        stopIndicator, // startY
+         // stopY
+        foregroundPaint!! // Paint
+    )
+
+
+}
+else{
     /** Draw line and set paint for Horizontal progress **/
     canvas.drawLine(
             0f, // startX
@@ -264,11 +289,12 @@ if (progressType=="cercle") {
 
         if (progressType=="cercle") {
             setMeasuredDimension(min, min)
+        }else if (progressType=="vertical"){
+            setMeasuredDimension(widthMeasureSpec, heightMeasureSpec)
         }else{
             setMeasuredDimension(widthMeasureSpec, heightMeasureSpec)
         }
-        rectF!![0 + strokeWidth / 2, 0 + strokeWidth / 2, min - strokeWidth / 2] =
-            min - strokeWidth / 2
+        rectF!![0 + strokeWidth / 2, 0 + strokeWidth / 2, min - strokeWidth / 2] = min - strokeWidth / 2
     }
 
 
