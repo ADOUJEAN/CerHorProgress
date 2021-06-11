@@ -19,7 +19,7 @@ import android.view.animation.DecelerateInterpolator
 /**
  * CerHorProgress is a subclass of {@link android.view.View} class
  * */
-class CerHorProgress (context: Context, attrs: AttributeSet) : View(context, attrs) {
+class CerHorProgress(context: Context, attrs: AttributeSet) : View(context, attrs) {
     /**
      * Progress types
      * CIRCULAR : Default is circular. Set @param progressType="cercle" for use circular progress
@@ -153,16 +153,17 @@ class CerHorProgress (context: Context, attrs: AttributeSet) : View(context, att
             fgColor = typedArray.getInt(R.styleable.CerHorProgress_progressForgroundColor, fgColor)
             useAdjust = typedArray.getBoolean(R.styleable.CerHorProgress_useAdjustColor, useAdjust)
 
-            if (typedArray.getString(R.styleable.CerHorProgress_progressCercleText)!=null) {
+            if (typedArray.getString(R.styleable.CerHorProgress_progressCercleText) != null) {
                 progressCercleText =
                     typedArray.getString(R.styleable.CerHorProgress_progressCercleText).toString()
             }
-            if (typedArray.getString(R.styleable.CerHorProgress_progressCercleTextUnity)!=null) {
+            if (typedArray.getString(R.styleable.CerHorProgress_progressCercleTextUnity) != null) {
                 progressCercleTextUnity =
-                    typedArray.getString(R.styleable.CerHorProgress_progressCercleTextUnity).toString()
+                    typedArray.getString(R.styleable.CerHorProgress_progressCercleTextUnity)
+                        .toString()
             }
 
-            if (typedArray.getString(R.styleable.CerHorProgress_progressType)!=null) {
+            if (typedArray.getString(R.styleable.CerHorProgress_progressType) != null) {
                 progressType =
                     typedArray.getString(R.styleable.CerHorProgress_progressType).toString()
             }
@@ -173,7 +174,7 @@ class CerHorProgress (context: Context, attrs: AttributeSet) : View(context, att
 
         /** Initialise progress paint **/
         backgroundPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        backgroundPaint!!.color = if(useAdjust) adjustAlpha(fgColor, 0.3f) else bgColor
+        backgroundPaint!!.color = if (useAdjust) adjustAlpha(fgColor, 0.3f) else bgColor
         backgroundPaint!!.style = Paint.Style.STROKE
         backgroundPaint!!.strokeWidth = strokeWidth
         foregroundPaint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -206,79 +207,86 @@ class CerHorProgress (context: Context, attrs: AttributeSet) : View(context, att
         val hCanvas = height.toFloat()
         val wCanvas = width.toFloat()
 
-if (progressType=="cercle") {
+        if (progressType == "cercle") {
 
-    /** Draw cercle and set paint **/
-    canvas.drawOval(rectF!!, backgroundPaint!!)
-    val angle = 360 * progress / progressMax
-    canvas.drawArc(rectF!!, startAngle.toFloat(), angle, false, foregroundPaint!!)
+            /** Draw cercle and set paint **/
+            canvas.drawOval(rectF!!, backgroundPaint!!)
+            val angle = 360 * progress / progressMax
+            canvas.drawArc(rectF!!, startAngle.toFloat(), angle, false, foregroundPaint!!)
 
-    /** Define Text height and width **/
-    val h = hCanvas/2
-    val w = wCanvas/2
+            /** Define Text height and width **/
+            val h = hCanvas / 2
+            val w = wCanvas / 2
 
-    /** Set the size on the two Texts according to cercle height **/
-    val textSize = h / 3
+            /** Set the size on the two Texts according to cercle height **/
+            val textSize = h / 3
 
-    /** Set cercle Text paint **/
+            /** Set cercle Text paint **/
 
-    val textPaint = TextPaint()
-    textPaint.setTextSize(textSize)
-    textPaint.color = Color.BLACK
-    textPaint.setTextAlign(Paint.Align.CENTER)
+            val textPaint = TextPaint()
+            textPaint.setTextSize(textSize)
+            textPaint.color = Color.BLACK
+            textPaint.setTextAlign(Paint.Align.CENTER)
 
-    val textPaintUnity = TextPaint()
-    textPaintUnity.setTextSize(textSize)
-    textPaintUnity.color = Color.GRAY
-    textPaintUnity.setTextAlign(Paint.Align.CENTER)
+            val textPaintUnity = TextPaint()
+            textPaintUnity.setTextSize(textSize)
+            textPaintUnity.color = Color.GRAY
+            textPaintUnity.setTextAlign(Paint.Align.CENTER)
 
-    /** Draw cercle text **/
-    canvas.drawText(progressCercleText, w, h - ((textPaint.descent() - textPaint.ascent()) / 2), textPaint)
-    canvas.drawText(progressCercleTextUnity, w, h + textPaintUnity.descent() - textPaintUnity.ascent(), textPaintUnity)
-}
-else if (progressType=="vertical"){
-    /** Draw line and set paint for vertical progress **/
-    canvas.drawLine(
-        wCanvas/2, // startX
-        hCanvas, // startY
-        wCanvas/2, // stopX
-        0f, // stopY
-        backgroundPaint!! // Paint
-    )
+            /** Draw cercle text **/
+            canvas.drawText(
+                progressCercleText,
+                w,
+                h - ((textPaint.descent() - textPaint.ascent()) / 2),
+                textPaint
+            )
+            canvas.drawText(
+                progressCercleTextUnity,
+                w,
+                h + textPaintUnity.descent() - textPaintUnity.ascent(),
+                textPaintUnity
+            )
+        } else if (progressType == "vertical") {
+            /** Draw line and set paint for vertical progress **/
+            canvas.drawLine(
+                wCanvas / 2, // startX
+                hCanvas, // startY
+                wCanvas / 2, // stopX
+                0f, // stopY
+                backgroundPaint!! // Paint
+            )
 
-    /** Define stop indicator **/
-    val stopIndicator = hCanvas * progress / progressMax
-    canvas.drawLine(
-        wCanvas/2, // stopX
-        0f,
-        wCanvas/2, // startX
-        stopIndicator, // startY
-         // stopY
-        foregroundPaint!! // Paint
-    )
+            /** Define stop indicator **/
+            val stopIndicator = hCanvas * progress / progressMax
+            canvas.drawLine(
+                wCanvas / 2, // stopX
+                0f,
+                wCanvas / 2, // startX
+                stopIndicator, // startY
+                // stopY
+                foregroundPaint!! // Paint
+            )
 
+        } else {
+            /** Draw line and set paint for Horizontal progress **/
+            canvas.drawLine(
+                0f, // startX
+                (height / 2).toFloat(), // startY
+                wCanvas, // stopX
+                hCanvas / 2, // stopY
+                backgroundPaint!! // Paint
+            )
 
-}
-else{
-    /** Draw line and set paint for Horizontal progress **/
-    canvas.drawLine(
-            0f, // startX
-            (height / 2).toFloat(), // startY
-            wCanvas, // stopX
-             hCanvas/2, // stopY
-            backgroundPaint!! // Paint
-    )
-
-    /** Define stop indicator **/
-    val stopIndicator = wCanvas * progress / progressMax
-    canvas.drawLine(
-            0f, // startX
-            (hCanvas / 2), // startY
-            stopIndicator, // stopX
-            (hCanvas / 2), // stopY
-            foregroundPaint!! // Paint
- )
-}
+            /** Define stop indicator **/
+            val stopIndicator = wCanvas * progress / progressMax
+            canvas.drawLine(
+                0f, // startX
+                (hCanvas / 2), // startY
+                stopIndicator, // stopX
+                (hCanvas / 2), // stopY
+                foregroundPaint!! // Paint
+            )
+        }
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -287,14 +295,15 @@ else{
         val width = getDefaultSize(suggestedMinimumWidth, widthMeasureSpec)
         val min = Math.min(width, height)
 
-        if (progressType=="cercle") {
+        if (progressType == "cercle") {
             setMeasuredDimension(min, min)
-        }else if (progressType=="vertical"){
+        } else if (progressType == "vertical") {
             setMeasuredDimension(widthMeasureSpec, heightMeasureSpec)
-        }else{
+        } else {
             setMeasuredDimension(widthMeasureSpec, heightMeasureSpec)
         }
-        rectF!![0 + strokeWidth / 2, 0 + strokeWidth / 2, min - strokeWidth / 2] = min - strokeWidth / 2
+        rectF!![0 + strokeWidth / 2, 0 + strokeWidth / 2, min - strokeWidth / 2] =
+            min - strokeWidth / 2
     }
 
 
@@ -314,8 +323,10 @@ else{
         val handler = Handler()
         animation(animMaxProgress)
         handler.postDelayed(
-            Runnable {animation(progress)
-                setProgressCercleText("${progress.toInt()}")},
+            Runnable {
+                animation(progress)
+                setProgressCercleText("${progress.toInt()}")
+            },
             1500
         )
     }
